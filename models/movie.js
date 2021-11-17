@@ -4,33 +4,33 @@ const mongoose = require('mongoose');
 const { dataModels } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
-  country : {
+  country: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: [true, 'Страна создания обязательна'],
+    required: true,
   },
-  director : {
+  director: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: [true, 'Режиссер обязателен'],
+    required: true,
   },
-  duration : {
+  duration: {
     type: Number,
     min: 1,
-    required: [true, 'Длительность обязательна'],
+    required: true,
   },
-  year : {
+  year: {
     type: String,
     length: 4,
-    required: [true, 'Год обязателен'],
+    required: true,
   },
-  description : {
+  description: {
     type: String,
     minlength: 10,
     maxlength: 100,
-    required: [true, 'Описание обязательно'],
+    required: true,
   },
   image: {
     type: String,
@@ -38,7 +38,7 @@ const movieSchema = new mongoose.Schema({
       validator: (value) => validator.isURL(value),
       message: (props) => `${props.value} некорректная ссылка`,
     },
-    required: [true, 'Ссылка на постер обязательна'],
+    required: true,
   },
   trailer: {
     type: String,
@@ -46,7 +46,7 @@ const movieSchema = new mongoose.Schema({
       validator: (value) => validator.isURL(value),
       message: (props) => `${props.value} некорректная ссылка`,
     },
-    required: [true, 'Ссылка на трейлер обязательна'],
+    required: true,
   },
   thumbnail: {
     type: String,
@@ -54,7 +54,7 @@ const movieSchema = new mongoose.Schema({
       validator: (value) => validator.isURL(value),
       message: (props) => `${props.value} некорректная ссылка`,
     },
-    required: [true, 'Ссылка на мини-постер обязательна'],
+    required: true,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -62,20 +62,20 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     required: true,
   },
-  nameRU : {
+  nameRU: {
     type: String,
     minlength: 2,
     maxlength: 100,
-    required: [true, 'Название на русском обязательно'],
+    required: true,
   },
-  nameEN : {
+  nameEN: {
     type: String,
     minlength: 2,
     maxlength: 100,
-    required: [true, 'Название на английском обязательно'],
+    required: true,
   },
 }, {
   versionKey: false,

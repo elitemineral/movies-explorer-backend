@@ -1,19 +1,20 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const { JWT_SECRET } = require('../utils/config');
 const User = require('../models/user');
 const ConflictError = require('../errors/ConflictError');
+
+const duplicateEmailError = new ConflictError('Пользователь с таким email уже существует');
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const { NODE_ENV, JWT_SECRET } = process.env;
-
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
+        JWT_SECRET,
         { expiresIn: 3600 * 24 * 7 },
       );
 
@@ -27,7 +28,6 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-// eslint-disable-next-line no-unused-vars
 module.exports.logout = (_req, res) => {
   res.clearCookie('jwt', {
     secure: true,
@@ -38,7 +38,10 @@ module.exports.logout = (_req, res) => {
 module.exports.me = (req, res, next) => {
   User.findById(req.user._id)
     .orFail()
-    .then((user) => res.send(user))
+    .then((user) => res.send({
+      name: user.name,
+      email: user.email,
+    }))
     .catch(next);
 };
 
@@ -56,7 +59,7 @@ module.exports.createUser = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'MongoServerError' && err.code === 11000) {
-        next(new ConflictError('Пользователь с таким email уже существует'));
+        next(duplicateEmailError);
         return;
       }
 
@@ -77,5 +80,12 @@ module.exports.setUserInfo = (req, res, next) => {
   )
     .orFail()
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'MongoServerError' && err.code === 11000) {
+        next(duplicateEmailError);
+        return;
+      }
+
+      next(err);
+    });
 };

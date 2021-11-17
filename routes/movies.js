@@ -9,10 +9,10 @@ const {
 const {
   newMovieInfoValidator,
   movieIdValidator,
-} = require('../utils/requestValidators');
+} = require('../middlewares/requestValidators');
 
 router.get('/movies', getMovies);
-router.post('/movies', newMovieInfoValidator(), createMovie);
-router.delete('/movies/:movieId', movieIdValidator(), deleteMovie);
+router.post('/movies', newMovieInfoValidator, createMovie);
+router.delete('/movies/:movieId', movieIdValidator, deleteMovie);
 
 module.exports = router;

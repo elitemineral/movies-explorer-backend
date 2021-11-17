@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Жак-Ив Кусто',
+    required: true,
   },
   email: {
     type: String,
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
       validator: (value) => validator.isEmail(value),
       message: (props) => `${props.value} некорректный email`,
     },
-    required: [true, 'Email обязателен'],
+    required: true,
     unique: true,
   },
   password: {
@@ -30,8 +30,7 @@ const userSchema = new mongoose.Schema({
   versionKey: false,
 });
 
-// eslint-disable-next-line func-names
-userSchema.statics.findUserByCredentials = function (email, password) {
+userSchema.statics.findUserByCredentials = function findUserByCredentials(email, password) {
   const error = new UnauthorizedError('Неверные почта или пароль');
 
   return this.findOne({ email }).select('+password')

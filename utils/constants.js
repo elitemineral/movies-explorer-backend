@@ -3,15 +3,6 @@ const dataModels = {
   movie: 'movie',
 };
 
-const statusCodes = {
-  badRequest: 400,
-  notAuthorized: 401,
-  forbidden: 403,
-  notFound: 404,
-  duplicateError: 409,
-  serverError: 500,
-};
-
 const corsOptions = {
   origin: [
     'http://localhost:3000',
@@ -28,6 +19,5 @@ const corsOptions = {
 
 module.exports = {
   dataModels,
-  statusCodes,
   corsOptions,
 };

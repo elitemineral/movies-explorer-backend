@@ -7,9 +7,9 @@ const {
 
 const {
   userInfoValidator,
-} = require('../utils/requestValidators');
+} = require('../middlewares/requestValidators');
 
 router.get('/users/me', me);
-router.patch('/users/me', userInfoValidator(), setUserInfo);
+router.patch('/users/me', userInfoValidator, setUserInfo);
 
 module.exports = router;
