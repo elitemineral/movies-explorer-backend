@@ -6,7 +6,7 @@ const dataModels = {
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'http://51.250.3.113',
+    'http://51.250.10.206',
     'http://best-movies-explorer.nomoredomains.rocks',
     'https://best-movies-explorer.nomoredomains.rocks',
   ],
