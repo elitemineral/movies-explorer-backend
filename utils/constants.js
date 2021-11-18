@@ -6,9 +6,9 @@ const dataModels = {
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'http://178.154.220.21',
-    'http://it-limon.nomoredomains.rocks',
-    'https://it-limon.nomoredomains.rocks',
+    'http://51.250.3.113',
+    'http://best-movies-explorer.nomoredomains.rocks',
+    'https://best-movies-explorer.nomoredomains.rocks',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
