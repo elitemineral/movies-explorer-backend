@@ -1,5 +1,8 @@
 # Movies Explorer backend
 
+api - https://api.best-movies-explorer.nomoredomains.rocks
+ip-адрес: 51.250.10.206
+
 ## Директории
 
 `/routes` — папка с файлами роутера  
