@@ -1,13 +1,7 @@
 require('dotenv').config();
 
-const {
-  PORT = 3000,
-  DB_URI = 'mongodb://localhost:27017/moviesdb',
-  JWT_SECRET = 'secret-key',
-} = process.env;
-
 module.exports = {
-  PORT,
-  DB_URI,
-  JWT_SECRET,
+  PORT = process.env.NODE_ENV !== 'production' ? 3000 : process.env.PORT,
+  DB_URI = process.env.NODE_ENV !== 'production' ? 'mongodb://localhost:27017/moviesdb' : process.env.DB_URI,
+  JWT_SECRET = process.env.NODE_ENV !== 'production' ? 'secret-key' : process.env.JWT_SECRET,
 };
