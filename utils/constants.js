@@ -17,7 +17,27 @@ const corsOptions = {
   credentials: true,
 };
 
+const resMessages = {
+  successfulAuth: 'Авторизация прошла успешно',
+  successfulLogout: 'Выход осуществлен',
+  moviedDeleted: 'Фильм удален',
+}
+
+const errMessages = {
+  failedAuth: 'С токеном что-то не так',
+  incorrectUrl: 'Неправильный формат url',
+  incorrectEmail: 'Неправильный формат email',
+  incorrectLoginInfo: 'Неверные почта или пароль',
+  movieForbidden: 'Запрещено удалять фильмы чужих пользователей',
+  movieNotFound: 'Фильм не найден',
+  pageNotFound: 'Запрашиваемая страница не найдена',
+  duplicateEmail: 'Пользователь с таким email уже существует',
+  serverError: 'На сервере произошла ошибка',
+}
+
 module.exports = {
   dataModels,
   corsOptions,
+  resMessages,
+  errMessages,
 };

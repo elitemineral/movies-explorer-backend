@@ -1,9 +1,12 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 
+const BadRequestError = require('../errors/BadRequestError');
+const { errMessages } = require('../utils/constants');
+
 const validateURL = (value) => {
   if (!validator.isURL(value, { require_protocol: true })) {
-    throw new Error('Неправильный формат ссылки');
+    throw new BadRequestError(errMessages.incorrectUrl);
   }
 
   return value;
@@ -47,9 +50,9 @@ const newMovieInfoValidator = celebrate({
   }),
 });
 
-const movieIdValidator = celebrate({
+const idValidator = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.number().required(),
+    movieId: Joi.string().alphanum().length(24).hex(),
   }),
 });
 
@@ -58,5 +61,5 @@ module.exports = {
   userInfoValidator,
   loginInfoValidator,
   newMovieInfoValidator,
-  movieIdValidator,
+  idValidator,
 };

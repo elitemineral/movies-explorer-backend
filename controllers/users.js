@@ -3,9 +3,10 @@ const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET } = require('../utils/config');
 const User = require('../models/user');
-const ConflictError = require('../errors/ConflictError');
 
-const duplicateEmailError = new ConflictError('Пользователь с таким email уже существует');
+const ConflictError = require('../errors/ConflictError');
+const { resMessages, errMessages } = require('../utils/constants');
+const duplicateEmailError = new ConflictError(errMessages.duplicateEmail);
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
@@ -23,7 +24,7 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
-      }).send({ message: 'Авторизация прошла успешно' });
+      }).send({ message: resMessages.successfulAuth });
     })
     .catch(next);
 };
@@ -32,7 +33,7 @@ module.exports.logout = (_req, res) => {
   res.clearCookie('jwt', {
     secure: true,
     sameSite: 'none',
-  }).send({ message: 'Выход осуществлен' });
+  }).send({ message: resMessages.successfulLogout });
 };
 
 module.exports.me = (req, res, next) => {
@@ -58,7 +59,7 @@ module.exports.createUser = (req, res, next) => {
       _id: user._id,
     }))
     .catch((err) => {
-      if (err.name === 'MongoServerError' && err.code === 11000) {
+      if (err.code === 11000) {
         next(duplicateEmailError);
         return;
       }
@@ -81,7 +82,7 @@ module.exports.setUserInfo = (req, res, next) => {
     .orFail()
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'MongoServerError' && err.code === 11000) {
+      if (err.code === 11000) {
         next(duplicateEmailError);
         return;
       }
