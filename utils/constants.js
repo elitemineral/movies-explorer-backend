@@ -21,7 +21,7 @@ const resMessages = {
   successfulAuth: 'Авторизация прошла успешно',
   successfulLogout: 'Выход осуществлен',
   moviedDeleted: 'Фильм удален',
-}
+};
 
 const errMessages = {
   failedAuth: 'С токеном что-то не так',
@@ -33,7 +33,7 @@ const errMessages = {
   pageNotFound: 'Запрашиваемая страница не найдена',
   duplicateEmail: 'Пользователь с таким email уже существует',
   serverError: 'На сервере произошла ошибка',
-}
+};
 
 module.exports = {
   dataModels,

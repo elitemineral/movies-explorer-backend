@@ -6,6 +6,7 @@ const User = require('../models/user');
 
 const ConflictError = require('../errors/ConflictError');
 const { resMessages, errMessages } = require('../utils/constants');
+
 const duplicateEmailError = new ConflictError(errMessages.duplicateEmail);
 
 module.exports.login = (req, res, next) => {
