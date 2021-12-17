@@ -7,14 +7,10 @@ const { errMessages } = require('../utils/constants');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
     required: true,
   },
   director: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
     required: true,
   },
   duration: {
@@ -66,14 +62,10 @@ const movieSchema = new mongoose.Schema({
   },
   nameRU: {
     type: String,
-    minlength: 2,
-    maxlength: 100,
     required: true,
   },
   nameEN: {
     type: String,
-    minlength: 2,
-    maxlength: 100,
     required: true,
   },
 }, {
