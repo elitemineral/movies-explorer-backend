@@ -47,7 +47,7 @@ const newMovieInfoValidator = celebrate({
     movieId: Joi.number().required().min(0),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-  }),
+  }).unknown(true),
 });
 
 const idValidator = celebrate({
